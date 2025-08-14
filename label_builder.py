@@ -55,19 +55,20 @@ def draw_vertical_text(draw, text, start_x, line_height, font_obj):
         draw.text((start_x, start_y + i * line_height), char, fill="black", font=font_obj)
 
 # 绘制前缀 + 主标题 + 底部编号
-def generate_prefix_oneline_title(prefix, title, index="①"):
+def generate_prefix_oneline_title(prefix, title, index="①", year="2025"):
     # 创建空白画布
     img = Image.new('RGB', (WIDTH, HEIGHT), color='white')
     draw = init_draw(img)
     draw_vertical_text(draw, prefix, 130, 54, font_prefix)  # 使用新的字体大小
     draw_vertical_text(draw, title,WIDTH - 230, 96,font_title)   # 使用新的字体大小
     draw.text((WIDTH//2 - 32, HEIGHT - 230), index, font=font_index, fill="black")
+    draw.text((WIDTH//2 - 80, HEIGHT - 120), year, font=font_index, fill="black")
     # 保存
     filename = f"label_{title}_{index}.png"
     img.save(f"label/{filename}")
 
 # 绘制前缀 + 双列主标题 + 底部编号
-def generate_prefix_twoline_title(prefix, title1, title2, index="①"):
+def generate_prefix_twoline_title(prefix, title1, title2, index="①", year="2025"):
     # 创建空白画布
     img = Image.new('RGB', (WIDTH, HEIGHT), color='white')
     draw = init_draw(img)
@@ -75,32 +76,37 @@ def generate_prefix_twoline_title(prefix, title1, title2, index="①"):
     draw_vertical_text(draw, title1, 231, 80,font_title)   # 使用新的字体大小
     draw_vertical_text(draw, title2, 364, 80,font_title)   # 使用新的字体大小
     draw.text((WIDTH//2 - 32, HEIGHT - 230), index, font=font_index, fill="black")
+    draw.text((WIDTH//2 - 80, HEIGHT - 120), year, font=font_index, fill="black")
     # 保存
     filename = f"label_{title1+title2}_{index}.png"
     img.save(f"label/{filename}")
 
 # 绘制主标题 + 底部编号
-def generate_oneline_title(title, index="①"):
+def generate_oneline_title(title, index="①", year="2025"):
     # 创建空白画布
     img = Image.new('RGB', (WIDTH, HEIGHT), color='white')
     draw = init_draw(img)
     draw_vertical_text(draw, title, WIDTH//2 - 32, 96,font_title)   # 使用新的字体大小
     draw.text((WIDTH//2 - 32, HEIGHT - 230), index, font=font_index, fill="black")
+    draw.text((WIDTH//2 - 80, HEIGHT - 120), year, font=font_index, fill="black")
     # 保存
     filename = f"label_{title}_{index}.png"
     img.save(f"label/{filename}")
 
 # 绘制双列主标题 + 底部编号
-def generate_twoline_title(title1, title2, index="①"):
+def generate_twoline_title(title1, title2, index="①", year="2025"):
     # 创建空白画布
     img = Image.new('RGB', (WIDTH, HEIGHT), color='white')
     draw = init_draw(img)
     draw_vertical_text(draw, title1, 140, 96,font_title)
     draw_vertical_text(draw, title2, WIDTH - 140 - 64, 96,font_title)
     draw.text((WIDTH//2 - 32, HEIGHT - 230), index, font=font_index, fill="black")
+    draw.text((WIDTH//2 - 80, HEIGHT - 120), year, font=font_index, fill="black")
     # 保存
     filename = f"label_{title1 + title2}_{index}.png"
     img.save(f"label/{filename}")
+
+
 
 if __name__ == "__main__":
     # generate_prefix_oneline_title()

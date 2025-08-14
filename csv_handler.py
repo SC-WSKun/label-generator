@@ -7,28 +7,29 @@ def batch_generate_from_csv(csv_path):
         for row in reader:
             # 预处理数据
             row = preprocess_row(row)
-            prefix = row.get('前缀', '').strip()
+            prefix = row.get('', '').strip()
             title1 = row.get('标题一', '').strip()
             title2 = row.get('标题二', '').strip()
             index = row.get('序号', '').strip()
+            year = row.get('年份', '').strip()
 
             # 判断使用哪个模板
             print(f"正在生成: {title1+title2}")
-            print(f"前缀: {prefix}")
+            print(f"前缀: {prefix} 标题一: {title1} 标题二: {title2}, 年份: {year}")
             if prefix and title1 and title2:
-                generate_prefix_twoline_title(prefix, title1, title2, index)
+                generate_prefix_twoline_title(prefix, title1, title2, index, year)
             elif prefix and title1:
-                generate_prefix_oneline_title(prefix, title1, index)
+                generate_prefix_oneline_title(prefix, title1, index, year)
             elif title1 and title2:
-                generate_twoline_title(title1, title2, index)
+                generate_twoline_title(title1, title2, index, year)
             elif title1:
-                generate_oneline_title(title1, index)
+                generate_oneline_title(title1, index, year)
             else:
                 print("无法识别的数据格式，跳过")
 
 # 竖排专用括号替换
 def replace_parentheses(text):
-    return text.replace("（", "︵").replace("）", "︶").replace("(", "︵").replace(")", "︶")
+    return text.replace("（", "︵").replace("）", "︶").replace("(", "︵").replace(")", "︶").replace("/", "／")
 
 # 统一文本预处理函数
 def preprocess_row(row):
