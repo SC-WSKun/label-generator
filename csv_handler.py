@@ -7,7 +7,7 @@ def batch_generate_from_csv(csv_path):
         for row in reader:
             # 预处理数据
             row = preprocess_row(row)
-            prefix = row.get('', '').strip()
+            prefix = row.get('前缀', '').strip()
             title1 = row.get('标题一', '').strip()
             title2 = row.get('标题二', '').strip()
             index = row.get('序号', '').strip()
